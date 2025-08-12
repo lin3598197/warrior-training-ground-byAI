@@ -147,6 +147,9 @@
       const [min, max] = currentMonster.reward;
       rewardPreview.textContent = `${t('defeat_reward')}: ${min}-${max} ${t('coins_reward')}`;
     }
+    
+    // 更新商店價格顯示
+    updateShopPrices();
   }
 
   function toggleLanguage() {
@@ -214,6 +217,52 @@
 
   let value = loadJSON(RATE_KEY, 0);
   let owned = loadJSON(OWNED_KEY, {});
+  
+  // 基礎價格配置
+  const basePrices = {
+    iron_sword: 50,
+    steel_sword: 300,
+    magic_sword: 1500,
+    legendary_sword: 8000,
+    cosmic_blade: 40000,
+    reality_cutter: 200000,
+    mana_crystal: 1000,
+    archer: 500,
+    knight: 3000,
+    dragon: 15000,
+    archangel: 75000,
+    titan_guardian: 400000,
+    cosmic_warrior: 2000000
+  };
+  
+  // 計算當前價格（每購買一個，價格增加15%）
+  function getCurrentPrice(itemKey) {
+    const basePrice = basePrices[itemKey];
+    const ownedCount = owned[itemKey] || 0;
+    return Math.floor(basePrice * Math.pow(1.15, ownedCount));
+  }
+  
+  // 更新所有商店按鈕的價格顯示
+  function updateShopPrices() {
+    shopButtons().forEach(btn => {
+      const key = btn.dataset.key;
+      if (key && basePrices[key]) {
+        const currentPrice = getCurrentPrice(key);
+        btn.dataset.cost = currentPrice;
+        
+        // 更新按鈕文本中的價格
+        const currentText = btn.textContent;
+        const translationKey = btn.getAttribute('data-i18n');
+        
+        if (translationKey) {
+          // 從翻譯中獲取基本文本，然後替換價格
+          const baseText = t(translationKey);
+          const newText = baseText.replace(/\(\d+\)/, `(${currentPrice})`);
+          btn.textContent = newText;
+        }
+      }
+    });
+  }
   function clickGain() {
     let attack = 1;
     
@@ -239,6 +288,7 @@
 
   function updateMoney() {
     moneyEl.textContent = value;
+    updateShopPrices(); // 更新價格顯示
     shopButtons().forEach(btn => {
       const cost = Number(btn.dataset.cost);
       btn.disabled = value < cost;
@@ -322,8 +372,8 @@
     const target = e.target;
     if (!(target instanceof HTMLElement)) return;
     if (!target.classList.contains('buy-item')) return;
-    const cost = Number(target.dataset.cost);
     const key = target.dataset.key;
+    const cost = getCurrentPrice(key); // 使用動態價格
     if (value < cost) return;
     value -= cost;
     owned[key] = (owned[key] || 0) + 1;
