@@ -1,8 +1,10 @@
 {
-  "name": "just-a-project-counter",
+  "name": "warrior-training-ground",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "一個有趣的 RPG 風格點擊器遊戲！支援中英文雙語",
+  "keywords": ["game", "rpg", "clicker", "javascript", "vite"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
