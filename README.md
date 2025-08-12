@@ -2,7 +2,10 @@
 
 一個有趣的 RPG 風格點擊器遊戲！支援中英文雙語 🌐
 
-![Game Preview](https://img.shields.io/badge/Game-RPG%20Clicker-brightgreen)
+![Game Preview](https://img.shields.io/badge/Game-RPG%20Clicker-b**🎮 準備好成為最強戰士了嗎？**
+
+---
+*最後更新：2025-08-13 00:01 GMT+8*tgreen)
 ![Languages](https://img.shields.io/badge/Languages-繁體中文%20%7C%20English-blue)
 ![Framework](https://img.shields.io/badge/Framework-Vanilla%20JS-yellow)
 ![License](https://img.shields.io/badge/License-MIT-green)

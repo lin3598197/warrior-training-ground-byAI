@@ -46,3 +46,6 @@ venv.bak/
 # 建置檔案
 dist/
 build/
+
+# Hacktime 相關檔案 (僅本地使用)
+hacktime*.html
