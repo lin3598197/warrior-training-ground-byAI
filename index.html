@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>戰士點擊器</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+  <div id="moneyHud" class="money-hud" aria-live="polite">
+    <span class="coin-icon" aria-hidden="true">⚔️</span>
+    <span id="moneyValue">0</span> <span data-i18n="currency">金幣</span>
+  </div>
+  
+  <!-- 語言切換按鈕 -->
+  <div class="language-switcher">
+    <button id="langToggle" class="lang-button" aria-label="切換語言">🌐 中文</button>
+  </div>
+  <main class="container">
+    <h1 data-i18n="title">戰士訓練場</h1>
+    
+    <!-- 怪物戰鬥區域 -->
+    <div class="monster-area">
+      <div class="monster-info">
+        <div class="monster-name" id="monsterName">史萊姆</div>
+        <div class="monster-hp">
+          <div class="hp-bar">
+            <div class="hp-fill" id="monsterHpBar" style="width: 100%"></div>
+          </div>
+          <span id="monsterHp">10/10</span>
+        </div>
+      </div>
+      <div class="monster-sprite" id="monsterSprite">🟢</div>
+      <div class="reward-preview" id="rewardPreview">擊敗獲得: 5-8 金幣</div>
+    </div>
+
+    <button id="countButton" class="big-button" aria-label="攻擊怪物"></button>
+    <div class="actions">
+      <button id="resetButton" class="reset-button" aria-label="重置進度" data-i18n="reset">重置</button>
+      <button id="shopToggle" class="shop-toggle" aria-label="切換武器店" aria-pressed="false" data-i18n="shop">武器店</button>
+    </div>
+  </main>
+  
+  <!-- 獎勵通知 -->
+  <div id="rewardNotification" class="reward-notification" style="display: none;">
+    <span id="rewardText">+5 金幣!</span>
+  </div>
+
+  <aside id="shopPanel" class="shop-panel" aria-label="武器店" hidden>
+    <h2 class="shop-panel-title" data-i18n="shop_title">⚔️ 武器商店</h2>
+    
+    <div class="shop-category">
+      <h3 class="category-title" data-i18n="weapons_category">🗡️ 武器</h3>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="50" data-key="iron_sword" data-i18n="iron_sword">鐵劍 (50)</button>
+        <span class="owned" data-owned-for="iron_sword" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="iron_sword_desc">攻擊力 +5</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="300" data-key="steel_sword" data-i18n="steel_sword">鋼劍 (300)</button>
+        <span class="owned" data-owned-for="steel_sword" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="steel_sword_desc">攻擊力 +25</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="1500" data-key="magic_sword" data-i18n="magic_sword">魔法劍 (1500)</button>
+        <span class="owned" data-owned-for="magic_sword" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="magic_sword_desc">攻擊力 +100</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="8000" data-key="legendary_sword" data-i18n="legendary_sword">傳奇神劍 (8000)</button>
+        <span class="owned" data-owned-for="legendary_sword" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="legendary_sword_desc">攻擊力 +400</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="40000" data-key="cosmic_blade" data-i18n="cosmic_blade">宇宙之刃 (40000)</button>
+        <span class="owned" data-owned-for="cosmic_blade" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="cosmic_blade_desc">攻擊力 +1500</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="200000" data-key="reality_cutter" data-i18n="reality_cutter">現實切割者 (200000)</button>
+        <span class="owned" data-owned-for="reality_cutter" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="reality_cutter_desc">攻擊力 +6000</span>
+      </div>
+    </div>
+
+    <div class="shop-category">
+      <h3 class="category-title" data-i18n="magic_category">🧙 魔法道具</h3>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="1000" data-key="mana_crystal" data-i18n="mana_crystal">魔力水晶 (1000)</button>
+        <span class="owned" data-owned-for="mana_crystal" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="mana_crystal_desc">魔力 +50</span>
+      </div>
+    </div>
+
+    <div class="shop-category">
+      <h3 class="category-title" data-i18n="mercenary_category">🏰 傭兵</h3>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="500" data-key="archer" data-i18n="archer">弓箭手 (500)</button>
+        <span class="owned" data-owned-for="archer" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="archer_desc">每秒攻擊 +10</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="3000" data-key="knight" data-i18n="knight">騎士 (3000)</button>
+        <span class="owned" data-owned-for="knight" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="knight_desc">每秒攻擊 +60</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="15000" data-key="dragon" data-i18n="dragon">巨龍 (15000)</button>
+        <span class="owned" data-owned-for="dragon" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="dragon_desc">每秒攻擊 +400</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="75000" data-key="archangel" data-i18n="archangel">大天使 (75000)</button>
+        <span class="owned" data-owned-for="archangel" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="archangel_desc">每秒攻擊 +1500</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="400000" data-key="titan_guardian" data-i18n="titan_guardian">泰坦守護者 (400000)</button>
+        <span class="owned" data-owned-for="titan_guardian" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="titan_guardian_desc">每秒攻擊 +6000</span>
+      </div>
+      <div class="shop-item">
+        <button class="buy-item" data-cost="2000000" data-key="cosmic_warrior" data-i18n="cosmic_warrior">宇宙戰士 (2000000)</button>
+        <span class="owned" data-owned-for="cosmic_warrior" data-i18n="owned">擁有 0</span>
+        <span class="item-desc" data-i18n="cosmic_warrior_desc">每秒攻擊 +25000</span>
+      </div>
+    </div>
+
+    <!-- 新增怪物解鎖道具 -->
+
+  </aside>
+  <script type="module" src="static/app.js"></script>
+</body>
+</html>
