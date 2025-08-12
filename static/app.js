@@ -204,6 +204,7 @@
 
   let currentMonsterIndex = loadJSON('monster:index:v1', 0);
   let currentMonster = { ...monsters[monsterOrder[currentMonsterIndex]] };
+  let isSpawningNewMonster = false;
 
   function loadJSON(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
@@ -248,12 +249,14 @@
   updateOwnedUI();
 
   function spawnNewMonster() {
+    isSpawningNewMonster = true;
     currentMonsterIndex = (currentMonsterIndex + 1) % monsterOrder.length;
     saveJSON('monster:index:v1', currentMonsterIndex);
     
     const monsterKey = monsterOrder[currentMonsterIndex];
     currentMonster = { ...monsters[monsterKey] };
     updateMonsterDisplay();
+    isSpawningNewMonster = false;
   }
 
   function updateMonsterDisplay() {
@@ -277,6 +280,10 @@
   }
 
   function attackMonster() {
+    if (isSpawningNewMonster || currentMonster.hp <= 0) {
+      return false;
+    }
+    
     const damage = clickGain();
     currentMonster.hp = Math.max(0, currentMonster.hp - damage);
     
@@ -288,20 +295,23 @@
       updateMoney();
       showReward(reward);
       
-      setTimeout(() => spawnNewMonster(), 500);
+      setTimeout(() => spawnNewMonster(), 100);
+      return true;
     }
     
     updateMonsterDisplay();
-    return currentMonster.hp <= 0;
+    return false;
   }
 
   btn.addEventListener('click', () => {
     const monsterKilled = attackMonster();
     
-    const clickReward = clickGain();
-    value += clickReward;
-    saveJSON(RATE_KEY, value);
-    updateMoney();
+    if (!isSpawningNewMonster && currentMonster.hp > 0) {
+      const clickReward = clickGain();
+      value += clickReward;
+      saveJSON(RATE_KEY, value);
+      updateMoney();
+    }
   });
 
   document.addEventListener('click', e => {
@@ -355,7 +365,7 @@
                                  (owned.titan_guardian || 0) * 6000 +
                                  (owned.cosmic_warrior || 0) * 25000;
       
-      if (currentMercenaryDPS > 0) {
+      if (currentMercenaryDPS > 0 && !isSpawningNewMonster && currentMonster.hp > 0) {
         console.log(`傭兵攻擊！DPS: ${currentMercenaryDPS}, 怪物HP: ${currentMonster.hp}/${currentMonster.maxHp}`);
         currentMonster.hp = Math.max(0, currentMonster.hp - currentMercenaryDPS);
         
@@ -367,7 +377,7 @@
           saveJSON(RATE_KEY, value);
           updateMoney();
           
-          spawnNewMonster();
+          setTimeout(() => spawnNewMonster(), 100);
         } else {
           updateMonsterDisplay();
         }
@@ -436,6 +446,7 @@
     value = 0;
     owned = {};
     currentMonsterIndex = 0;
+    isSpawningNewMonster = false;
     
     localStorage.removeItem(RATE_KEY);
     localStorage.removeItem(OWNED_KEY);
