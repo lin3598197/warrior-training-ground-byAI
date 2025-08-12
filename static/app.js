@@ -297,7 +297,7 @@
       const reward = Math.floor(Math.random() * (max - min + 1)) + min;
       value += reward;
       saveJSON(RATE_KEY, value);
-      updateMoney();
+      updateMoney(); 
       showReward(reward);
       
       setTimeout(() => spawnNewMonster(), 100);
