@@ -249,14 +249,19 @@
   updateOwnedUI();
 
   function spawnNewMonster() {
+    if (isSpawningNewMonster) return; // 防止重複調用
     isSpawningNewMonster = true;
+    
     currentMonsterIndex = (currentMonsterIndex + 1) % monsterOrder.length;
     saveJSON('monster:index:v1', currentMonsterIndex);
     
     const monsterKey = monsterOrder[currentMonsterIndex];
     currentMonster = { ...monsters[monsterKey] };
     updateMonsterDisplay();
-    isSpawningNewMonster = false;
+    
+    setTimeout(() => {
+      isSpawningNewMonster = false;
+    }, 50); // 給一點時間確保狀態同步
   }
 
   function updateMonsterDisplay() {
@@ -376,6 +381,7 @@
           value += reward;
           saveJSON(RATE_KEY, value);
           updateMoney();
+          showReward(reward);
           
           setTimeout(() => spawnNewMonster(), 100);
         } else {
