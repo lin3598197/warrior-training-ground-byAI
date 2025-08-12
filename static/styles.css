@@ -1,11 +1,9 @@
-/* 語言切換按鈕 */
 .language-switcher {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 1000;
 }
-
 .lang-button {
   background: var(--panel);
   border: 2px solid var(--accent);
@@ -17,13 +15,11 @@
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-
 .lang-button:hover {
   background: var(--accent);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
-
 :root {
   --bg: #0f1115;
   --panel: #1d242f;
@@ -123,7 +119,6 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .big-button, .reset-button { transition: none; }
 }
-/* 右上角金錢 HUD */
 .money-hud {
   position: fixed;
   top: .75rem;
@@ -143,7 +138,6 @@ h1 {
   font-size: 1.2rem;
   filter: saturate(1.2);
 }
-/* 商店區塊 */
 .shop {
   width: 100%;
   margin-top: .75rem;
@@ -213,13 +207,9 @@ h1 {
   border-radius: 6px;
   border: 1px solid rgba(251,191,36,.3);
 }
-
-/* 商店開啟時讓整個 Counter 區塊左移 (視窗大小自適應) */
 body.store-open .container {
   transform: translateX(clamp(-420px, -25vw, -260px));
 }
-
-/* 商店切換按鈕 */
 .shop-toggle {
   background: linear-gradient(135deg,#4b5563,#374151);
   border: 1px solid #525f6d;
@@ -243,8 +233,6 @@ body.store-open .container {
   border-color: #3b82f6;
   color: #fff;
 }
-
-/* 固定右側的商店面板（初始隱藏，透過 body.store-open 顯示） */
 .shop-panel {
   position: fixed;
   top: 6rem;
@@ -275,7 +263,6 @@ body.store-open .shop-panel {
   letter-spacing: .05em;
   color: #e2e8f0;
 }
-/* 商店分類 */
 .shop-category {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -293,8 +280,6 @@ body.store-open .shop-panel {
   text-transform: uppercase;
   letter-spacing: .8px;
 }
-
-/* 怪物戰鬥區域 */
 .monster-area {
   width: 100%;
   background: rgba(0,0,0,.2);
@@ -304,17 +289,14 @@ body.store-open .shop-panel {
   margin-bottom: 1.5rem;
   text-align: center;
 }
-
 .monster-info {
   margin-bottom: .8rem;
 }
-
 .monster-name {
   font: 600 1.1rem/1.2 system-ui;
   color: #f59e0b;
   margin-bottom: .4rem;
 }
-
 .monster-hp {
   display: flex;
   align-items: center;
@@ -323,7 +305,6 @@ body.store-open .shop-panel {
   font: 500 .85rem/1 var(--mono);
   color: #e5e7eb;
 }
-
 .hp-bar {
   width: 120px;
   height: 8px;
@@ -332,19 +313,16 @@ body.store-open .shop-panel {
   overflow: hidden;
   border: 1px solid #4b5563;
 }
-
 .hp-fill {
   height: 100%;
   background: linear-gradient(90deg, #ef4444, #dc2626);
   transition: width .3s ease;
 }
-
 .monster-sprite {
   font-size: 2.5rem;
   margin: .5rem 0;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
 }
-
 .reward-preview {
   font: 500 .75rem/1.2 system-ui;
   color: #fbbf24;
@@ -354,8 +332,6 @@ body.store-open .shop-panel {
   display: inline-block;
   margin-top: .4rem;
 }
-
-/* 獎勵通知 */
 .reward-notification {
   position: fixed;
   top: 50%;
@@ -371,7 +347,6 @@ body.store-open .shop-panel {
   pointer-events: none;
   animation: rewardPop .6s ease-out;
 }
-
 @keyframes rewardPop {
   0% { transform: translate(-50%, -50%) scale(.5); opacity: 0; }
   50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
