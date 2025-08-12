@@ -299,7 +299,6 @@
       saveJSON(RATE_KEY, value);
       updateMoney(); 
       showReward(reward);
-      
       setTimeout(() => spawnNewMonster(), 100);
       return true;
     }
