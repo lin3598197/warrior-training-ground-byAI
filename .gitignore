@@ -49,3 +49,6 @@ build/
 
 # Hacktime 相關檔案 (僅本地使用)
 hacktime*.html
+hacktime*.js
+hacktime*.cjs
+vscode-hacktime.*
