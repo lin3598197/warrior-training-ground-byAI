@@ -157,16 +157,16 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: .4rem;
+  gap: .5rem;
   background: rgba(0,0,0,.15);
-  padding: .7rem;
-  border-radius: 8px;
+  padding: 1rem;
+  border-radius: 10px;
   border: 1px solid #374151;
 }
 .shop-item-row {
   display: flex;
   align-items: center;
-  gap: .6rem;
+  gap: .8rem;
   justify-content: space-between;
 }
 .buy-item {
@@ -174,10 +174,10 @@ h1 {
   color: #f3f4f6;
   border: 1px solid #8b5cf6;
   flex: 1;
-  min-width: 200px;
-  padding: .6rem .9rem;
-  border-radius: 10px;
-  font: 600 .82rem/1.1 system-ui;
+  min-width: 220px;
+  padding: .8rem 1.1rem;
+  border-radius: 12px;
+  font: 600 .9rem/1.1 system-ui;
   cursor: pointer;
   letter-spacing: .5px;
   text-align: left;
@@ -237,14 +237,14 @@ body.store-open .container {
   position: fixed;
   top: 6rem;
   right: 2rem;
-  width: min(420px, 55vw);
+  width: min(520px, 65vw);
   max-height: calc(100vh - 6rem);
   overflow-y: auto;
   background: rgba(29,36,47,.92);
   backdrop-filter: blur(10px);
   border: 1px solid #2f3a47;
   border-radius: 20px;
-  padding: 1.5rem 1.4rem 1.6rem;
+  padding: 2rem 1.8rem 2rem;
   box-shadow: 0 10px 34px -12px #000a;
   opacity: 0;
   transform: translateX(40px) scale(.97);
@@ -257,8 +257,8 @@ body.store-open .shop-panel {
   pointer-events: auto;
 }
 .shop-panel-title {
-  margin: 0 0 .75rem;
-  font-size: 1.05rem;
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: .05em;
   color: #e2e8f0;
@@ -273,8 +273,8 @@ body.store-open .shop-panel {
   margin-bottom: 0;
 }
 .category-title {
-  margin: 0 0 .8rem;
-  font-size: 1rem;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #f59e0b;
   text-transform: uppercase;

@@ -2,7 +2,10 @@
 
 一個有趣的 RPG 風格點擊器遊戲！支援中英文雙語 🌐
 
-![Game Preview](https://img.shields.io/badge/Game-RPG%20Clicker-b**🎮 準備好成為最強戰士了嗎？**
+![Game Preview](https://img.shields.io/badge/Game-RPG%20Clicker-b)**🎮 準備好成為最強戰士了嗎？**
+
+---
+*最後更新：2025-08-13 18:53 GMT+8*
 
 ---
 ![Languages](https://img.shields.io/badge/Languages-繁體中文%20%7C%20English-blue)
@@ -140,4 +143,4 @@ warrior-training-ground/
 **🎮 準備好成為最強戰士了嗎？**
 
 ---
-*最後更新：2025-08-12 15:35 GMT+8*
+*最後更新：2025-08-12 16:17 GMT+8*
